@@ -1,7 +1,8 @@
 import React, { Component } from "react";
-import { StyleSheet, Text, View, Image } from "react-native";
+import { StyleSheet, Text, View, Image, Linking } from "react-native";
 import Card from "./Card";
 import CardSection from "./CardSection";
+import Button from "./Button";
 
 class AlbumDetail extends Component {
   constructor(props) {
@@ -10,7 +11,7 @@ class AlbumDetail extends Component {
 
 
   render() {
-    const { title, artist, thumbnail_image, image } = this.props.album;
+    const { title, artist, thumbnail_image, image, url } = this.props.album;
     const { imageStyle, headerTextStyle, thumbanailStyle, headerContentStyle, thumbnailContainerStyle } = styles
     // console.log("Testing album detail", this.props.album);
     return (
@@ -27,11 +28,20 @@ class AlbumDetail extends Component {
             <Text>{artist}</Text>
           </View>
         </CardSection>
+
         <CardSection>
           <Image 
             style={imageStyle} 
             source={{ uri: image }} 
           />
+        </CardSection>
+
+        <CardSection>
+          <Button onPress={() => Linking.openURL(url)} >
+            <Text>
+              Buy Now
+            </Text>
+          </Button>  
         </CardSection>
       </Card> 
     );
